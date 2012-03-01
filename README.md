@@ -14,27 +14,36 @@ Wolverine is a wrapper around that functionality, to package it up in a format m
 
 1) Make sure you have redis 2.6 or higher installed. As of now, that means compiling from source.
 
-    git clone https://github.com/antirez/redis.git
-    cd redis && make
-    ./src/redis-server
+```shell
+git clone https://github.com/antirez/redis.git
+cd redis && make
+./src/redis-server
+```
 
 2) Add wolverine to your gemfile
 
-    gem 'wolverine'
+```ruby
+gem 'wolverine'
+```
 
 3) Add your lua scripts to `app/redis`
 
-    -- app/redis/util/mexists.lua
-    local exists = {}
-    local existence
-    for _, key in ipairs(KEYS) do
-      table.insert(exists, redis.call('exists', key))
-    end
-    return exists
+##### app/redis/util/mexists.lua
+
+```lua
+local exists = {}
+local existence
+for _, key in ipairs(KEYS) do
+  table.insert(exists, redis.call('exists', key))
+end
+return exists
+```
 
 4) Call from your code:
 
-    Wolverine.call('util/mexists', 'key1', 'key2', 'key3') #=> [0, 1, 0]
+```ruby
+Wolverine.call('util/mexists', 'key1', 'key2', 'key3') #=> [0, 1, 0]
+```
 
 ## Configuration
 
