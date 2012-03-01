@@ -1,0 +1,1 @@
+* Support calling templates like: `Wolverine.util.mexists('key1', 'key2', 'key3')`
