@@ -12,7 +12,7 @@ Wolverine is a wrapper around that functionality, to package it up in a format m
 
 ## How do I use it?
 
-1) Make sure you have redis 2.6 or higher installed. As of now, that means compiling from source.
+1) Make sure you have redis 2.6 or higher installed. As of now, that means compiling from source:
 
 ```shell
 git clone https://github.com/antirez/redis.git
@@ -20,13 +20,13 @@ cd redis && make
 ./src/redis-server
 ```
 
-2) Add wolverine to your gemfile
+2) Add wolverine to your Gemfile:
 
 ```ruby
 gem 'wolverine'
 ```
 
-3) Add your lua scripts to `app/redis`
+3) Add your lua scripts to `app/redis`:
 
 ```lua
 -- app/redis/util/mexists.lua
@@ -38,7 +38,7 @@ end
 return exists
 ```
 
-4) Call from your code:
+4) Call wolverine from your code:
 
 ```ruby
 Wolverine.call('util/mexists', 'key1', 'key2', 'key3') #=> [0, 1, 0]
