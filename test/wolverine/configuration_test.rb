@@ -16,7 +16,7 @@ module Wolverine
 
     def test_default_script_path
       actual = Wolverine::Configuration.new.script_path
-      assert_equal Pathname.new('foo/app/redis'), actual
+      assert_equal Pathname.new('foo/app/wolverine'), actual
     end
 
     def test_setting_redis

@@ -49,7 +49,7 @@ Wolverine.call('util/mexists', 'key1', 'key2', 'key3') #=> [0, 1, 0]
 Available configuration options:
 
 * `Wolverine.config.redis` (default `Redis.new`)
-* `Wolverine.config.script_path` (default `Rails.root + 'app/redis'`)
+* `Wolverine.config.script_path` (default `Rails.root + 'app/wolverine'`)
 
 If you want to override one or both of these, doing so in an initializer is recommended but not required.
 

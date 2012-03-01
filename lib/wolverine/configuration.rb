@@ -5,7 +5,7 @@ module Wolverine
     end
 
     def script_path
-      super || @script_path ||= Rails.root + 'app/redis'
+      super || @script_path ||= Rails.root + 'app/wolverine'
     end
   end
 end
