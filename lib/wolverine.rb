@@ -1,46 +1,25 @@
-require "wolverine/version"
 require 'redis'
 
-module Wolverine
-  def self.script_path
-    Rails.root + 'app/redis'
-  end
+require "wolverine/version"
+require 'wolverine/configuration'
+require 'wolverine/script'
 
-  def self.call(file, *args)
-    file << ".lua" unless file =~ /\.lua$/
-    LuaFile.new(script_path + file).call(redis, *args)
+module Wolverine
+  def self.config
+    @config ||= Configuration.new
   end
 
   def self.redis
-    $redis ||= Redis.new
+    config.redis
   end
 
-  class LuaFile
-    attr_reader :content, :digest
-    def initialize file
-      @content = load_lua file
-      @digest = Digest::SHA1.hexdigest @content
-    end
+  def self.call(file, *args)
+    Script.new(full_path(file)).call(redis, *args)
+  end
 
-    def call redis, *args
-      run_evalsha redis, *args
-    rescue => e
-      e.message =~ /NOSCRIPT/ ? run_eval(redis, *args) : raise
-    end
-
-    private
-
-    def run_evalsha redis, *args
-      redis.evalsha digest, args.size, *args
-    end
-
-    def run_eval redis, *args
-      redis.eval content, args.size, *args
-    end
-
-    def load_lua file
-      File.read file
-    end
+  def self.full_path(file)
+    file << ".lua" unless file =~ /\.lua$/
+    config.script_path + file
   end
 
 end
