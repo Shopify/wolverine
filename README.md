@@ -28,9 +28,8 @@ gem 'wolverine'
 
 3) Add your lua scripts to `app/redis`
 
-##### app/redis/util/mexists.lua
-
 ```lua
+-- app/redis/util/mexists.lua
 local exists = {}
 local existence
 for _, key in ipairs(KEYS) do
