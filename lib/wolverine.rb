@@ -25,14 +25,4 @@ module Wolverine
     super 
   end
 
-  def self.call(file, *args)
-    pathname = file.kind_of?(Pathname) ? file : full_path(file)
-    Script.new(pathname).call(redis, *args)
-  end
-
-  def self.full_path(file)
-    file << ".lua" unless file =~ /\.lua$/
-    config.script_path + file
-  end
-
 end
