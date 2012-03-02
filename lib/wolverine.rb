@@ -15,6 +15,10 @@ module Wolverine
     config.redis
   end
 
+  def self.reset!
+    @root_directory = nil
+  end
+
   def self.root_directory
     @root_directory ||= PathComponent.new(config.script_path)
   end
