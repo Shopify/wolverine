@@ -14,13 +14,21 @@ module Wolverine
     private
 
     def create_method sym, *args
-      if File.directory?(path = @path + sym.to_s)
+      if directory?(path = @path + sym.to_s)
         define_directory_method path, sym
-      elsif File.exists?(path = @path + "#{sym}.lua")
+      elsif file?(path = @path + "#{sym}.lua")
         define_script_method path, sym, *args
       else
         raise MissingTemplate
       end
+    end
+
+    def directory?(path)
+      File.directory?(path)
+    end
+
+    def file?(path)
+      File.exists?(path) && !File.directory?(path)
     end
 
     def define_directory_method path, sym
