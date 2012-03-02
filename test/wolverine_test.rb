@@ -11,6 +11,10 @@ class WolverineTest < MiniTest::Unit::TestCase
     assert_equal Pathname.new('foo/bar.lua'), Wolverine.full_path('bar')
   end
 
+  def test_finding_a_file
+    assert_equal 3, Wolverine.three
+  end
+
   def test_redis
     assert_equal :redis, Wolverine.redis
   end

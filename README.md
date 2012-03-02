@@ -41,8 +41,11 @@ return exists
 4) Call wolverine from your code:
 
 ```ruby
-Wolverine.call('util/mexists', 'key1', 'key2', 'key3') #=> [0, 1, 0]
+Wolverine.util.mexists('key1', 'key2', 'key3') #=> [0, 1, 0]
 ```
+
+Methods are available on `Wolverine` paralleling the directory structure
+of wolverine's `script_path`.
 
 ## Configuration
 
