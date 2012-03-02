@@ -1,2 +1,1 @@
 * Cache things. Reading files on each invocation is dumb.
-* Better tests (esp. around method_missing magic spike thing)
