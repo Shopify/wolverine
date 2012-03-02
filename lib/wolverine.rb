@@ -1,32 +1,12 @@
 require 'redis'
+require 'pathname'
 
 require 'wolverine/version'
 require 'wolverine/configuration'
 require 'wolverine/script'
+require 'wolverine/path_component'
 
 module Wolverine
-
-  class Directory
-    class MissingTemplate < StandardError ; end
-    def initialize path
-      @path = path
-    end
-
-    def method_missing sym, *args
-      resolve sym, *args
-    end
-
-    def resolve sym, *args
-      if File.directory?(path = @path + sym.to_s)
-        Directory.new(path)
-      elsif File.exists?(path = @path + "#{sym}.lua")
-        Wolverine.call path, *args
-      else
-        raise MissingTemplate
-      end
-    end
-  end
-
   def self.config
     @config ||= Configuration.new
   end
@@ -35,9 +15,13 @@ module Wolverine
     config.redis
   end
 
+  def self.root_directory
+    @root_directory ||= PathComponent.new(config.script_path)
+  end
+
   def self.method_missing sym, *args
-    Directory.new(config.script_path).resolve(sym, *args)
-  rescue Directory::MissingTemplate
+    root_directory.send(sym, *args) 
+  rescue PathComponent::MissingTemplate
     super 
   end
 

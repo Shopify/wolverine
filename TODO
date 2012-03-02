@@ -1,1 +1,2 @@
-* Cache things. Reading files on each invocation is dumb.
+- Tests for Wolverine::PathComponent
+- Think of more TODO items

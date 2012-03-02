@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 module Wolverine
   class Script
     attr_reader :content, :digest
