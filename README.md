@@ -26,10 +26,10 @@ cd redis && make
 gem 'wolverine'
 ```
 
-3) Add your lua scripts to `app/redis`:
+3) Add your lua scripts to `app/wolverine`:
 
 ```lua
--- app/redis/util/mexists.lua
+-- app/wolverine/util/mexists.lua
 local exists = {}
 local existence
 for _, key in ipairs(KEYS) do
