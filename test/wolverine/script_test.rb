@@ -14,6 +14,15 @@ module Wolverine
       @script ||= Wolverine::Script.new('file1')
     end
 
+    def test_errors_are_better
+      assert_raises Wolverine::InvalidScriptError do
+        script = Wolverine::Script.new('file1')
+        script.instance_variable_set("@content", "asdfasdfasdf+31f")
+        script.instance_variable_set("@digest", "79437f5edda13f9c1669b978dd7a9066dd2059f1")
+        script.call(Redis.new)
+      end
+    end
+
     def test_digest_and_content
       content = "return 1" 
       assert_equal CONTENT, script.content
