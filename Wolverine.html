@@ -189,7 +189,7 @@ values.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#reset%21-class_method" title="reset! (class method)">+ (Object) <strong>reset!</strong> </a>
+      <a href="#reset%21-class_method" title="reset! (class method)">+ (void) <strong>reset!</strong> </a>
     
 
     
@@ -400,13 +400,13 @@ if the the method maps to a lua file.</p>
       <div class="method_details ">
   <p class="signature " id="reset!-class_method">
   
-    + (<tt>Object</tt>) <strong>reset!</strong> 
+    + (<tt>void</tt>) <strong>reset!</strong> 
   
 
   
 </p><div class="docstring">
   <div class="discussion">
-    
+    <p class="note returns_void">This method returns an undefined value.</p>
 <p>Resets all the scripts cached by Wolverine. Scripts are lazy-loaded and
 cached in-memory, so if a file changes on disk, it will be necessary to
 manually reset the cache using <tt>reset!</tt>.</p>
@@ -416,24 +416,6 @@ manually reset the cache using <tt>reset!</tt>.</p>
 </div>
 <div class="tags">
   
-<h3>Returns:</h3>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'></span>
-      
-      
-      
-        
-        <div class='inline'>
-<p>nil</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -461,7 +443,7 @@ manually reset the cache using <tt>reset!</tt>.</p>
 </div>
     
     <div id="footer">
-  Generated on Fri Mar  2 23:09:15 2012 by 
+  Generated on Fri Mar  2 23:16:33 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.5 (ruby-1.9.3).
 </div>
