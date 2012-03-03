@@ -14,14 +14,34 @@ module Wolverine
       @script ||= Wolverine::Script.new('file1')
     end
 
-    def test_errors_are_better
-      assert_raises Wolverine::InvalidScriptError do
-        script = Wolverine::Script.new('file1')
+    def test_compilation_error
+      base = Pathname.new('/a/b/c/d')
+      file = Pathname.new('/a/b/c/d/e/file1.lua')
+      Wolverine.config.script_path = base
+      begin
+        script = Wolverine::Script.new(file)
         script.instance_variable_set("@content", "asdfasdfasdf+31f")
         script.instance_variable_set("@digest", "79437f5edda13f9c1669b978dd7a9066dd2059f1")
         script.call(Redis.new)
+      rescue Wolverine::LuaCompilationError => e
+        assert_equal "[e/file1.lua:1] '=' expected near '+'", e.message
       end
     end
+
+    def test_runtime_error
+      base = Pathname.new('/a/b/c/d')
+      file = Pathname.new('/a/b/c/d/e/file1.lua')
+      Wolverine.config.script_path = base
+      begin
+        script = Wolverine::Script.new(file)
+        script.instance_variable_set("@content", "return nil > 3")
+        script.instance_variable_set("@digest", "39437f5edda13f9c1669b978dd7a9066dd2059f1")
+        script.call(Redis.new)
+      rescue Wolverine::LuaRuntimeError => e
+        assert_equal "[e/file1.lua:1] attempt to compare number with nil", e.message
+      end
+    end
+
 
     def test_digest_and_content
       content = "return 1" 
