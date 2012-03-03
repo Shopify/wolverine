@@ -24,7 +24,8 @@ module Wolverine
         script.instance_variable_set("@digest", "79437f5edda13f9c1669b978dd7a9066dd2059f1")
         script.call(Redis.new)
       rescue Wolverine::LuaCompilationError => e
-        assert_equal "[e/file1.lua:1] '=' expected near '+'", e.message
+        assert_equal "'=' expected near '+'", e.message
+        assert_equal "\tfrom e/file1.lua:1", e.backtrace.first
       end
     end
 
@@ -38,7 +39,8 @@ module Wolverine
         script.instance_variable_set("@digest", "39437f5edda13f9c1669b978dd7a9066dd2059f1")
         script.call(Redis.new)
       rescue Wolverine::LuaRuntimeError => e
-        assert_equal "[e/file1.lua:1] attempt to compare number with nil", e.message
+        assert_equal "attempt to compare number with nil", e.message
+        assert_equal "\tfrom e/file1.lua:1", e.backtrace.first
       end
     end
 

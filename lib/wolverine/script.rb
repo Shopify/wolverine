@@ -24,7 +24,12 @@ module Wolverine
       if e.message =~ /ERR Error (compiling|running) script \(.*?\): \[.*?\]:(\d+): (.*)/
         stage, line_number, message = $1, $2, $3
         klass = (stage == "compiling") ? LuaCompilationError : LuaRuntimeError
-        raise klass, "[#{relative_path}:#{line_number}] #{message}"
+        begin
+          raise klass.new(message)
+        rescue => e
+          e.backtrace.unshift("\tfrom #{relative_path}:#{line_number}")
+          raise e
+        end
       else
         raise
       end

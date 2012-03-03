@@ -1,2 +1,3 @@
+- clean up error handling method
 - Re-evaluate what actually needs to be exposed as public
 - Think of more TODO items
