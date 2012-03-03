@@ -256,7 +256,7 @@ handled by <span class='object_link'><a href="LuaError.html" title="Wolverine::L
     
 <p>Passes the script and supplied arguments to redis for evaulation. It first
 attempts to use a script redis has already cached by using the
-<tt>EVALSHA</tt> command, but falls back to providing the full script  text
+<tt>EVALSHA</tt> command, but falls back to providing the full script text
 via <tt>EVAL</tt> if redis has not seen this script before. Future
 invocations will then use <tt>EVALSHA</tt> without erroring.</p>
 
@@ -368,7 +368,7 @@ invocations will then use <tt>EVALSHA</tt> without erroring.</p>
     <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>NOSCRIPT</span><span class='regexp_end'>/</span></span> <span class='op'>?</span> <span class='id identifier rubyid_run_eval'>run_eval</span><span class='lparen'>(</span><span class='id identifier rubyid_redis'>redis</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_raise'>raise</span>
   <span class='kw'>end</span>
 <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
-  <span class='kw'>if</span> <span class='const'>LuaError</span><span class='period'>.</span><span class='id identifier rubyid_intercepts?'>intercepts?</span><span class='lparen'>(</span><span class='id identifier rubyid_e'>e</span><span class='rparen'>)</span> 
+  <span class='kw'>if</span> <span class='const'>LuaError</span><span class='period'>.</span><span class='id identifier rubyid_intercepts?'>intercepts?</span><span class='lparen'>(</span><span class='id identifier rubyid_e'>e</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_raise'>raise</span> <span class='const'>LuaError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_e'>e</span><span class='comma'>,</span> <span class='ivar'>@file</span><span class='rparen'>)</span>
   <span class='kw'>else</span>
     <span class='id identifier rubyid_raise'>raise</span>
@@ -384,7 +384,7 @@ invocations will then use <tt>EVALSHA</tt> without erroring.</p>
 </div>
     
     <div id="footer">
-  Generated on Sat Mar  3 00:39:34 2012 by 
+  Generated on Sat Mar  3 01:03:43 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.5 (ruby-1.9.3).
 </div>
