@@ -14,4 +14,9 @@ YARD::Rake::YardocTask.new do |yardoc|
   # ]
 end
 
+task :docs do
+  Rake::Task['yard'].invoke
+  system("cd doc && git add . && git commit -am 'Regenerated docs' && git push origin gh-pages")
+end
+
 task default: :test
