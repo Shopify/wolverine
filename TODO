@@ -1,5 +1,2 @@
-- be smarter about trimming and rearranging the backtrace
-- cache methods on Wolverine, rather than using mm all the time
-- clean up error handling method
-- Re-evaluate what actually needs to be exposed as public
-- Think of more TODO items
+- cache methods on Wolverine, rather than using method_missing all the time
+- better tests around error handling and stacktrace trimming
