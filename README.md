@@ -2,11 +2,9 @@
 
 Wolverine is a simple library to allow you to manage and run redis server-side lua scripts from a rails app, or other ruby code.
 
-## What are you talking about?
+Redis versions 2.6 and up allow lua scripts to be run on the server that execute atomically and very quickly.
 
-Redis versions 2.6 and up allow lua scripts to be run on the server that execute atomically and very, very quickly.
-
-This is really, really cool.
+This is *extremely* useful.
 
 Wolverine is a wrapper around that functionality, to package it up in a format more familiar to a Rails codebase.
 
@@ -62,7 +60,7 @@ For more information on scripting redis with lua, refer to redis' excellent docu
 
 ## License
 
-Copyright (C) 2012 Shopify
+Copyright (C) 2012 [Shopify](http://shopify.com) by [Burke Libbey](http://burkelibbey.org)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
