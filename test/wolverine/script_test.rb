@@ -46,12 +46,6 @@ module Wolverine
       end
     end
 
-    def test_digest_and_content
-      content = "return 1" 
-      assert_equal CONTENT, script.content
-      assert_equal DIGEST, script.digest
-    end
-
     def test_call_with_cache_hit
       tc = self
       redis = Class.new do
