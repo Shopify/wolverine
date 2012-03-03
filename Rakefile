@@ -8,7 +8,7 @@ end
 require 'yard'
 require 'yard/rake/yardoc_task'
 YARD::Rake::YardocTask.new do |yardoc|
-  yardoc.options = ['--verbose', '--markup', 'markdown']
+  yardoc.options = ['--verbose']
   # yardoc.files = [
   #   'lib/**/*.rb', 'README.md', 'CHANGELOG.md', 'LICENSE'
   # ]
