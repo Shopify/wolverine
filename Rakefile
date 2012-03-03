@@ -19,4 +19,4 @@ task :docs do
   system("cd doc && git add . && git commit -am 'Regenerated docs' && git push origin gh-pages")
 end
 
-task default: :test
+task :default => :test
