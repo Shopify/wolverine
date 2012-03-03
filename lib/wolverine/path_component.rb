@@ -6,11 +6,11 @@ module Wolverine
   #
   # Calling a method that maps to a directory will return a new {PathComponent}
   # with a +path+ referring to that directory.
-  # 
+  #
   # Calling a method that maps to a file (with +'.lua'+ automatically appended
   # to the name) will load the file via {Script} and call it with the
   # arugments passed, returning the result ({method_missing}).
-  class PathComponent 
+  class PathComponent
     class MissingTemplate < StandardError ; end
 
     # @param path [Pathname] full path to the current file or directory
@@ -20,7 +20,7 @@ module Wolverine
 
     # @param sym [Symbol] the file or directory to look up and execute
     # @param args [*Objects] arguments to pass to the {Script}, if +sym+ resolves to a lua file
-    # @return [PathComponent, Object] A new, nested {PathComponent} if +sym+ resolves to 
+    # @return [PathComponent, Object] A new, nested {PathComponent} if +sym+ resolves to
     #   a directory, or an execution result if it resolves to a file.
     # @raise [MissingTemplate] if +sym+ maps to neither a directory or a file
     def method_missing sym, *args

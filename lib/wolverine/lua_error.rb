@@ -1,7 +1,7 @@
 module Wolverine
   # Reformats errors raised by redis representing failures while executing
   # a lua script. The default errors have confusing messages and backtraces,
-  # and a type of +RuntimeError+. This class improves the message and 
+  # and a type of +RuntimeError+. This class improves the message and
   # modifies the backtrace to include the lua script itself in a reasonable
   # way.
   class LuaError < StandardError
@@ -9,7 +9,7 @@ module Wolverine
     WOLVERINE_LIB_PATH = File.expand_path('../../', __FILE__)
 
     # Is this error one that should be reformatted?
-    # 
+    #
     # @param error [StandardError] the original error raised by redis
     # @return [Boolean] is this an error that should be reformatted?
     def self.intercepts? error
@@ -18,7 +18,7 @@ module Wolverine
 
     # Initialize a new {LuaError} from an existing redis error, adjusting
     # the message and backtrace in the process.
-    # 
+    #
     # @param error [StandardError] the original error raised by redis
     # @param file [Pathname] full path to the lua file the error ocurred in
     def initialize error, file

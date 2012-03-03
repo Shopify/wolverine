@@ -6,8 +6,8 @@ module Wolverine
   # is handled by {LuaError}.
   class Script
 
-    # Loads the script file from disk and calculates its +SHA1+ sum. 
-    # 
+    # Loads the script file from disk and calculates its +SHA1+ sum.
+    #
     # @param file [Pathname] the full path to the indicated file
     def initialize file
       @file = file
@@ -17,7 +17,7 @@ module Wolverine
 
     # Passes the script and supplied arguments to redis for evaulation.
     # It first attempts to use a script redis has already cached by using
-    # the +EVALSHA+ command, but falls back to providing the full script 
+    # the +EVALSHA+ command, but falls back to providing the full script
     # text via +EVAL+ if redis has not seen this script before. Future
     # invocations will then use +EVALSHA+ without erroring.
     #
@@ -33,7 +33,7 @@ module Wolverine
         e.message =~ /NOSCRIPT/ ? run_eval(redis, *args) : raise
       end
     rescue => e
-      if LuaError.intercepts?(e) 
+      if LuaError.intercepts?(e)
         raise LuaError.new(e, @file)
       else
         raise

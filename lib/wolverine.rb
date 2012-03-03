@@ -10,7 +10,7 @@ require 'wolverine/lua_error'
 module Wolverine
   # Returns the configuration object for reading and writing
   # configuration values.
-  # 
+  #
   # @return [Wolverine::Configuration] the configuration object
   def self.config
     @config ||= Configuration.new
@@ -35,13 +35,13 @@ module Wolverine
   # Used to handle dynamic accesses to scripts. Successful lookups will be
   # cached on the {PathComponent} object. See {PathComponent#method_missing}
   # for more detail on how this works.
-  # 
+  #
   # @return [PathComponent, Object] a PathComponent if the method maps to a
   #   directory, or an execution result if the the method maps to a lua file.
   def self.method_missing sym, *args
-    root_directory.send(sym, *args) 
+    root_directory.send(sym, *args)
   rescue PathComponent::MissingTemplate
-    super 
+    super
   end
 
   private
