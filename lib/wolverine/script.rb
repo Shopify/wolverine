@@ -13,7 +13,6 @@ module Wolverine
       @digest = Digest::SHA1.hexdigest @content
     end
 
-    # Wolverine::InvalidScriptError: ERR Error running script (call to f_f5fbb1da9ad036109842747becb4e2abb5e95966): [string "func definition"]:27: attempt to compare nil with number  (in #<Pathname:/Users/burke/src/s/shopify/app/wolverine/reservations/reserve.lua>)
     def call redis, *args
       begin
         run_evalsha redis, *args
@@ -27,8 +26,7 @@ module Wolverine
         begin
           raise klass.new(message)
         rescue => e
-          e.backtrace.unshift("\tfrom #{relative_path}:#{line_number}")
-          raise e
+          raise correct_lua_backtrace(e, file, line_number)
         end
       else
         raise
@@ -37,11 +35,10 @@ module Wolverine
 
     private
 
-    def relative_path
-      file.relative_path_from(Wolverine.config.script_path)
-    end
-
-    def format_error_message(error)
+    def correct_lua_backtrace(error, file, line_number)
+      4.times { error.backtrace.shift }
+      error.backtrace.unshift("#{file}:#{line_number}")
+      error
     end
 
     def run_evalsha redis, *args

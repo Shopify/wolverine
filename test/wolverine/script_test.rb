@@ -25,7 +25,7 @@ module Wolverine
         script.call(Redis.new)
       rescue Wolverine::LuaCompilationError => e
         assert_equal "'=' expected near '+'", e.message
-        assert_equal "\tfrom e/file1.lua:1", e.backtrace.first
+        assert_equal "e/file1.lua:1", e.backtrace.first
       end
     end
 
@@ -40,10 +40,9 @@ module Wolverine
         script.call(Redis.new)
       rescue Wolverine::LuaRuntimeError => e
         assert_equal "attempt to compare number with nil", e.message
-        assert_equal "\tfrom e/file1.lua:1", e.backtrace.first
+        assert_equal "e/file1.lua:1", e.backtrace.first
       end
     end
-
 
     def test_digest_and_content
       content = "return 1" 
