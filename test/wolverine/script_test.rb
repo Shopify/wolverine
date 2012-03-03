@@ -14,33 +14,17 @@ module Wolverine
       @script ||= Wolverine::Script.new('file1')
     end
 
-    def test_compilation_error
+    def test_error
       base = Pathname.new('/a/b/c/d')
       file = Pathname.new('/a/b/c/d/e/file1.lua')
       Wolverine.config.script_path = base
+      redis = stub
+      redis.expects(:evalsha).raises(%q{ERR Error running script (call to f_178d75adaa46af3d8237cfd067c9fdff7b9d504f): [string "func definition"]:1: attempt to compare nil with number})
       begin
         script = Wolverine::Script.new(file)
-        script.instance_variable_set("@content", "asdfasdfasdf+31f")
-        script.instance_variable_set("@digest", "79437f5edda13f9c1669b978dd7a9066dd2059f1")
-        script.call(Redis.new)
+        script.call(redis)
       rescue Wolverine::LuaError => e
-        assert_equal "'=' expected near '+'", e.message
-        assert_equal "/a/b/c/d/e/file1.lua:1", e.backtrace.first
-        assert_match /script.rb/, e.backtrace[1]
-      end
-    end
-
-    def test_runtime_error
-      base = Pathname.new('/a/b/c/d')
-      file = Pathname.new('/a/b/c/d/e/file1.lua')
-      Wolverine.config.script_path = base
-      begin
-        script = Wolverine::Script.new(file)
-        script.instance_variable_set("@content", "return nil > 3")
-        script.instance_variable_set("@digest", "39437f5edda13f9c1669b978dd7a9066dd2059f1")
-        script.call(Redis.new)
-      rescue Wolverine::LuaError => e
-        assert_equal "attempt to compare number with nil", e.message
+        assert_equal "attempt to compare nil with number", e.message
         assert_equal "/a/b/c/d/e/file1.lua:1", e.backtrace.first
         assert_match /script.rb/, e.backtrace[1]
       end
