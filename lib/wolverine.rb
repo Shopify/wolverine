@@ -5,6 +5,7 @@ require 'wolverine/version'
 require 'wolverine/configuration'
 require 'wolverine/script'
 require 'wolverine/path_component'
+require 'wolverine/lua_error'
 
 module Wolverine
   def self.config

@@ -23,9 +23,10 @@ module Wolverine
         script.instance_variable_set("@content", "asdfasdfasdf+31f")
         script.instance_variable_set("@digest", "79437f5edda13f9c1669b978dd7a9066dd2059f1")
         script.call(Redis.new)
-      rescue Wolverine::LuaCompilationError => e
+      rescue Wolverine::LuaError => e
         assert_equal "'=' expected near '+'", e.message
         assert_equal "/a/b/c/d/e/file1.lua:1", e.backtrace.first
+        assert_match /script.rb/, e.backtrace[1]
       end
     end
 
@@ -38,9 +39,10 @@ module Wolverine
         script.instance_variable_set("@content", "return nil > 3")
         script.instance_variable_set("@digest", "39437f5edda13f9c1669b978dd7a9066dd2059f1")
         script.call(Redis.new)
-      rescue Wolverine::LuaRuntimeError => e
+      rescue Wolverine::LuaError => e
         assert_equal "attempt to compare number with nil", e.message
         assert_equal "/a/b/c/d/e/file1.lua:1", e.backtrace.first
+        assert_match /script.rb/, e.backtrace[1]
       end
     end
 
