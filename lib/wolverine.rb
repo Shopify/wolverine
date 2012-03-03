@@ -27,7 +27,7 @@ module Wolverine
   # cached in-memory, so if a file changes on disk, it will be necessary to
   # manually reset the cache using +reset!+.
   #
-  # @return nil
+  # @return [void]
   def self.reset!
     @root_directory = nil
   end
