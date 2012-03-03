@@ -94,17 +94,19 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A <span class='object_link'><a href="" title="Wolverine::PathComponent (class)">PathComponent</a></span> represents either the +Wolverine.config.script_path+
-directory, or a subdirectory of it. Calling (nearly) any method on it will
-cause it to look in the filesystem at the location it refers to for a file
-or directory matching the method name. These results are cached.</p>
+    
+<p>A <span class='object_link'><a href="" title="Wolverine::PathComponent (class)">PathComponent</a></span> represents either the
+<tt>Wolverine.config.script_path</tt> directory, or a subdirectory of it.
+Calling (nearly) any method on it will cause it to look in the filesystem
+at the location it refers to for a file or directory matching the method
+name. These results are cached.</p>
 
 <p>Calling a method that maps to a directory will return a new <span class='object_link'><a href="" title="Wolverine::PathComponent (class)">PathComponent</a></span>
-with a +path+ referring to that directory.</p>
+with a <tt>path</tt> referring to that directory.</p>
 
-<p>Calling a method that maps to a file (with +'.lua'+ automatically appended
-to the name) will load the file via <span class='object_link'><a href="Script.html" title="Wolverine::Script (class)">Script</a></span> and call it with the
-arugments passed, returning the result (<span class='object_link'><a href="../Wolverine.html#method_missing-class_method" title="Wolverine.method_missing (method)">method_missing</a></span>).</p>
+<p>Calling a method that maps to a file (with <tt>'.lua'</tt> automatically appended
+to the name) will load the file via <span class='object_link'><a href="Script.html" title="Wolverine::Script (class)">Script</a></span> and call it with the arugments
+passed, returning the result (<span class='object_link'><a href="../Wolverine.html#method_missing-class_method" title="Wolverine.method_missing (method)">method_missing</a></span>).</p>
 
 
   </div>
@@ -155,7 +157,8 @@ arugments passed, returning the result (<span class='object_link'><a href="../Wo
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new instance of PathComponent.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of PathComponent.</p>
 </div></span>
   
 </li>
@@ -177,8 +180,9 @@ arugments passed, returning the result (<span class='object_link'><a href="../Wo
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new, nested <span class='object_link'><a href="" title="Wolverine::PathComponent (class)">PathComponent</a></span> if +sym+ resolves to 
-a directory, or an execution result if it resolves to a file.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>A new, nested <span class='object_link'><a href="" title="Wolverine::PathComponent (class)">PathComponent</a></span> if <tt>sym</tt> resolves to  a directory, or
+an execution result if it resolves to a file.</p>
 </div></span>
   
 </li>
@@ -199,7 +203,8 @@ a directory, or an execution result if it resolves to a file.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>A new instance of PathComponent</p>
+    
+<p>A new instance of PathComponent</p>
 
 
   </div>
@@ -218,7 +223,8 @@ a directory, or an execution result if it resolves to a file.</p>
       
       
         &mdash;
-        <div class='inline'><p>full path to the current file or directory</p>
+        <div class='inline'>
+<p>full path to the current file or directory</p>
 </div>
       
     </li>
@@ -264,8 +270,9 @@ a directory, or an execution result if it resolves to a file.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>A new, nested <span class='object_link'><a href="" title="Wolverine::PathComponent (class)">Wolverine::PathComponent</a></span> if +sym+ resolves to 
-a directory, or an execution result if it resolves to a file.</p>
+    
+<p>A new, nested <span class='object_link'><a href="" title="Wolverine::PathComponent (class)">Wolverine::PathComponent</a></span> if <tt>sym</tt> resolves to  a directory, or
+an execution result if it resolves to a file.</p>
 
 
   </div>
@@ -284,7 +291,8 @@ a directory, or an execution result if it resolves to a file.</p>
       
       
         &mdash;
-        <div class='inline'><p>the file or directory to look up and execute</p>
+        <div class='inline'>
+<p>the file or directory to look up and execute</p>
 </div>
       
     </li>
@@ -299,7 +307,8 @@ a directory, or an execution result if it resolves to a file.</p>
       
       
         &mdash;
-        <div class='inline'><p>arguments to pass to the <span class='object_link'><a href="Script.html" title="Wolverine::Script (class)">Script</a></span>, if +sym+ resolves to a lua file</p>
+        <div class='inline'>
+<p>arguments to pass to the <span class='object_link'><a href="Script.html" title="Wolverine::Script (class)">Script</a></span>, if <tt>sym</tt> resolves to a lua file</p>
 </div>
       
     </li>
@@ -317,8 +326,9 @@ a directory, or an execution result if it resolves to a file.</p>
       
       
         &mdash;
-        <div class='inline'><p>A new, nested <span class='object_link'><a href="" title="Wolverine::PathComponent (class)">Wolverine::PathComponent</a></span> if +sym+ resolves to 
-a directory, or an execution result if it resolves to a file.</p>
+        <div class='inline'>
+<p>A new, nested <span class='object_link'><a href="" title="Wolverine::PathComponent (class)">Wolverine::PathComponent</a></span> if <tt>sym</tt> resolves to  a directory, or
+an execution result if it resolves to a file.</p>
 </div>
       
     </li>
@@ -335,7 +345,8 @@ a directory, or an execution result if it resolves to a file.</p>
       
       
         &mdash;
-        <div class='inline'><p>if +sym+ maps to neither a directory or a file</p>
+        <div class='inline'>
+<p>if <tt>sym</tt> maps to neither a directory or a file</p>
 </div>
       
     </li>
@@ -371,7 +382,7 @@ a directory, or an execution result if it resolves to a file.</p>
 </div>
     
     <div id="footer">
-  Generated on Fri Mar  2 23:05:12 2012 by 
+  Generated on Fri Mar  2 23:09:15 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.5 (ruby-1.9.3).
 </div>

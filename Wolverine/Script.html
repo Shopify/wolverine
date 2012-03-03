@@ -94,9 +94,10 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><span class='object_link'><a href="" title="Wolverine::Script (class)">Script</a></span> represents a lua script in the filesystem. It loads the script
-from disk and handles talking to redis to execute it. Error handling
-is handled by <span class='object_link'><a href="LuaError.html" title="Wolverine::LuaError (class)">LuaError</a></span>.</p>
+    
+<p><span class='object_link'><a href="" title="Wolverine::Script (class)">Script</a></span> represents a lua script in the filesystem. It loads the script
+from disk and handles talking to redis to execute it. Error handling is
+handled by <span class='object_link'><a href="LuaError.html" title="Wolverine::LuaError (class)">LuaError</a></span>.</p>
 
 
   </div>
@@ -135,7 +136,8 @@ is handled by <span class='object_link'><a href="LuaError.html" title="Wolverine
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Passes the script and supplied arguments to redis for evaulation.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Passes the script and supplied arguments to redis for evaulation.</p>
 </div></span>
   
 </li>
@@ -159,7 +161,8 @@ is handled by <span class='object_link'><a href="LuaError.html" title="Wolverine
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Loads the script file from disk and calculates its +SHA1+ sum.</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Loads the script file from disk and calculates its <tt>SHA1</tt> sum.</p>
 </div></span>
   
 </li>
@@ -180,7 +183,8 @@ is handled by <span class='object_link'><a href="LuaError.html" title="Wolverine
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>Loads the script file from disk and calculates its +SHA1+ sum.</p>
+    
+<p>Loads the script file from disk and calculates its <tt>SHA1</tt> sum.</p>
 
 
   </div>
@@ -199,7 +203,8 @@ is handled by <span class='object_link'><a href="LuaError.html" title="Wolverine
       
       
         &mdash;
-        <div class='inline'><p>the full path to the indicated file</p>
+        <div class='inline'>
+<p>the full path to the indicated file</p>
 </div>
       
     </li>
@@ -248,11 +253,12 @@ is handled by <span class='object_link'><a href="LuaError.html" title="Wolverine
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>Passes the script and supplied arguments to redis for evaulation.
-It first attempts to use a script redis has already cached by using
-the +EVALSHA+ command, but falls back to providing the full script 
-text via +EVAL+ if redis has not seen this script before. Future
-invocations will then use +EVALSHA+ without erroring.</p>
+    
+<p>Passes the script and supplied arguments to redis for evaulation. It first
+attempts to use a script redis has already cached by using the
+<tt>EVALSHA</tt> command, but falls back to providing the full script  text
+via <tt>EVAL</tt> if redis has not seen this script before. Future
+invocations will then use <tt>EVALSHA</tt> without erroring.</p>
 
 
   </div>
@@ -271,7 +277,8 @@ invocations will then use +EVALSHA+ without erroring.</p>
       
       
         &mdash;
-        <div class='inline'><p>the redis connection to run against</p>
+        <div class='inline'>
+<p>the redis connection to run against</p>
 </div>
       
     </li>
@@ -286,7 +293,8 @@ invocations will then use +EVALSHA+ without erroring.</p>
       
       
         &mdash;
-        <div class='inline'><p>the arguments to the script</p>
+        <div class='inline'>
+<p>the arguments to the script</p>
 </div>
       
     </li>
@@ -304,7 +312,8 @@ invocations will then use +EVALSHA+ without erroring.</p>
       
       
         &mdash;
-        <div class='inline'><p>the value passed back by redis after script execution</p>
+        <div class='inline'>
+<p>the value passed back by redis after script execution</p>
 </div>
       
     </li>
@@ -321,8 +330,8 @@ invocations will then use +EVALSHA+ without erroring.</p>
       
       
         &mdash;
-        <div class='inline'><p>if the script failed to compile of encountered a
-runtime error</p>
+        <div class='inline'>
+<p>if the script failed to compile of encountered a runtime error</p>
 </div>
       
     </li>
@@ -375,7 +384,7 @@ runtime error</p>
 </div>
     
     <div id="footer">
-  Generated on Fri Mar  2 23:05:12 2012 by 
+  Generated on Fri Mar  2 23:09:15 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.5 (ruby-1.9.3).
 </div>
