@@ -1,3 +1,5 @@
+require 'pathname'
+require 'benchmark'
 require 'digest/sha1'
 
 module Wolverine
@@ -10,7 +12,7 @@ module Wolverine
     #
     # @param file [Pathname] the full path to the indicated file
     def initialize file
-      @file = file
+      @file = Pathname.new(file)
       @content = load_lua file
       @digest = Digest::SHA1.hexdigest @content
     end
@@ -43,11 +45,26 @@ module Wolverine
     private
 
     def run_evalsha redis, *args
-      redis.evalsha @digest, args.size, *args
+      instrument :evalsha do
+        redis.evalsha @digest, args.size, *args
+      end
     end
 
     def run_eval redis, *args
-      redis.eval @content, args.size, *args
+      instrument :eval do
+        redis.eval @content, args.size, *args
+      end
+    end
+
+    def instrument eval_type
+      ret = nil
+      runtime = Benchmark.realtime { ret = yield }
+      Wolverine.config.instrumentation.call relative_path.to_s, runtime, eval_type
+      ret
+    end
+
+    def relative_path
+      path = @file.relative_path_from(Wolverine.config.script_path)
     end
 
     def load_lua file

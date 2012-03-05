@@ -51,8 +51,9 @@ Available configuration options:
 
 * `Wolverine.config.redis` (default `Redis.new`)
 * `Wolverine.config.script_path` (default `Rails.root + 'app/wolverine'`)
+* `Wolverine.config.instrumentation` (default none)
 
-If you want to override one or both of these, doing so in an initializer is recommended but not required.
+If you want to override one or more of these, doing so in an initializer is recommended but not required. See the [full documentation](http://shopify.github.com/wolverine/Wolverine/Configuration.html) for more details.
 
 ## More information
 

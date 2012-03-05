@@ -19,6 +19,11 @@ module Wolverine
       assert_equal Pathname.new('foo/app/wolverine'), actual
     end
 
+    def test_default_instrumentation
+      config = Wolverine::Configuration.new
+      assert_equal nil, config.instrumentation.call(1, 2, 3)
+    end
+
     def test_setting_redis
       config = Wolverine::Configuration.new
       config.redis = :foo
@@ -29,6 +34,12 @@ module Wolverine
       config = Wolverine::Configuration.new
       config.script_path = :foo
       assert_equal :foo, config.script_path
+    end
+
+    def test_setting_instrumentation
+      config = Wolverine::Configuration.new
+      config.instrumentation = proc { |a, b, c| :omg }
+      assert_equal :omg, config.instrumentation.call(1,2,3)
     end
 
   end
