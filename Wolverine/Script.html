@@ -218,17 +218,17 @@ handled by <span class='object_link'><a href="LuaError.html" title="Wolverine::L
       <pre class="lines">
 
 
-12
-13
 14
 15
-16</pre>
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wolverine/script.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/wolverine/script.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_file'>file</span>
-  <span class='ivar'>@file</span> <span class='op'>=</span> <span class='id identifier rubyid_file'>file</span>
+  <span class='ivar'>@file</span> <span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span>
   <span class='ivar'>@content</span> <span class='op'>=</span> <span class='id identifier rubyid_load_lua'>load_lua</span> <span class='id identifier rubyid_file'>file</span>
   <span class='ivar'>@digest</span> <span class='op'>=</span> <span class='const'>Digest</span><span class='op'>::</span><span class='const'>SHA1</span><span class='period'>.</span><span class='id identifier rubyid_hexdigest'>hexdigest</span> <span class='ivar'>@content</span>
 <span class='kw'>end</span></pre>
@@ -344,8 +344,6 @@ invocations will then use <tt>EVALSHA</tt> without erroring.</p>
       <pre class="lines">
 
 
-29
-30
 31
 32
 33
@@ -356,10 +354,12 @@ invocations will then use <tt>EVALSHA</tt> without erroring.</p>
 38
 39
 40
-41</pre>
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/wolverine/script.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/wolverine/script.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_call'>call</span> <span class='id identifier rubyid_redis'>redis</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span>
   <span class='kw'>begin</span>
@@ -384,7 +384,7 @@ invocations will then use <tt>EVALSHA</tt> without erroring.</p>
 </div>
     
     <div id="footer">
-  Generated on Sat Mar  3 01:12:13 2012 by 
+  Generated on Mon Mar  5 16:11:32 2012 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.5 (ruby-1.9.3).
 </div>
