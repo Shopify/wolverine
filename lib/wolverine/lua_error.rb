@@ -5,7 +5,7 @@ module Wolverine
   # modifies the backtrace to include the lua script itself in a reasonable
   # way.
   class LuaError < StandardError
-    PATTERN = /ERR Error (compiling|running) script \(.*?\): \[.*?\]:(\d+): (.*)/
+    PATTERN = /ERR Error (compiling|running) script \(.*?\): .*?:(\d+): (.*)/
     WOLVERINE_LIB_PATH = File.expand_path('../../', __FILE__)
 
     # Is this error one that should be reformatted?
