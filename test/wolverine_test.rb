@@ -14,4 +14,14 @@ class WolverineTest < MiniTest::Unit::TestCase
     refute_equal Wolverine.root_directory, dir
   end
 
+  def test_instantiate_wolverine_with_config
+    r = Struct.new(:Redis)
+    config = Wolverine::Configuration.new(r, 'path')
+    wolverine = Wolverine.new(config)
+
+    assert_equal r, wolverine.config.redis
+    assert_equal r, wolverine.redis
+    assert_equal 'path', wolverine.config.script_path
+  end
+
 end

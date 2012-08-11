@@ -7,7 +7,7 @@ module Rails
   end
 end
 
-module Wolverine
+class Wolverine
   class ConfigurationTest < MiniTest::Unit::TestCase
 
     def test_default_redis

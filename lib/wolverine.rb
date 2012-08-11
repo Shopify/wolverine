@@ -7,7 +7,7 @@ require 'wolverine/script'
 require 'wolverine/path_component'
 require 'wolverine/lua_error'
 
-module Wolverine
+class Wolverine
   # Returns the configuration object for reading and writing
   # configuration values.
   #
@@ -44,10 +44,36 @@ module Wolverine
     super
   end
 
+  def initialize(config = nil)
+    @config = config
+  end
+
+  def config
+    @config || self.class.config
+  end
+
+  def redis
+    config.redis
+  end
+
+  def reset!
+    @root_directory = nil
+  end
+
+  def method_missing sym, *args
+    root_directory.send(sym, *args)
+  rescue PathComponent::MissingTemplate
+    super
+  end
+
   private
 
   def self.root_directory
     @root_directory ||= PathComponent.new(config.script_path)
+  end
+
+  def root_directory
+    @root_directory ||= PathComponent.new(config.script_path, redis)
   end
 
 end

@@ -1,4 +1,4 @@
-module Wolverine
+class Wolverine
   # A {PathComponent} represents either the +Wolverine.config.script_path+
   # directory, or a subdirectory of it. Calling (nearly) any method on it will
   # cause it to look in the filesystem at the location it refers to for a file
@@ -14,8 +14,10 @@ module Wolverine
     class MissingTemplate < StandardError ; end
 
     # @param path [Pathname] full path to the current file or directory
-    def initialize path
+    # @param redis [Redis]
+    def initialize path, redis = nil
       @path = path
+      @redis = redis || Wolverine.redis
     end
 
     # @param sym [Symbol] the file or directory to look up and execute
@@ -49,14 +51,14 @@ module Wolverine
     end
 
     def define_directory_method path, sym
-      dir = PathComponent.new(path)
+      dir = PathComponent.new(path, @redis)
       define_metaclass_method(sym) { dir }
     end
 
     def define_script_method path, sym, *args
       script = Wolverine::Script.new(path)
       define_metaclass_method(sym) { |*args|
-        script.call(Wolverine.redis, *args)
+        script.call(@redis, *args)
       }
     end
 
