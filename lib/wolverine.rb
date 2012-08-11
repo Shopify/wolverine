@@ -73,7 +73,7 @@ class Wolverine
   end
 
   def root_directory
-    @root_directory ||= PathComponent.new(config.script_path, redis)
+    @root_directory ||= PathComponent.new(config.script_path, {:config => config, :redis => redis})
   end
 
 end

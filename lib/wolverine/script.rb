@@ -11,10 +11,11 @@ class Wolverine
     # Loads the script file from disk and calculates its +SHA1+ sum.
     #
     # @param file [Pathname] the full path to the indicated file
-    def initialize file
+    def initialize file, options = {}
       @file = Pathname.new(file)
       @content = load_lua file
       @digest = Digest::SHA1.hexdigest @content
+      @config = options[:config] || Wolverine.config
     end
 
     # Passes the script and supplied arguments to redis for evaulation.
@@ -59,12 +60,12 @@ class Wolverine
     def instrument eval_type
       ret = nil
       runtime = Benchmark.realtime { ret = yield }
-      Wolverine.config.instrumentation.call relative_path.to_s, runtime, eval_type
+      @config.instrumentation.call relative_path.to_s, runtime, eval_type
       ret
     end
 
     def relative_path
-      path = @file.relative_path_from(Wolverine.config.script_path)
+      path = @file.relative_path_from(@config.script_path)
     end
 
     def load_lua file

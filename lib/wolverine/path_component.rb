@@ -15,9 +15,11 @@ class Wolverine
 
     # @param path [Pathname] full path to the current file or directory
     # @param redis [Redis]
-    def initialize path, redis = nil
+    def initialize path, options = {}
       @path = path
-      @redis = redis || Wolverine.redis
+      @options = options
+      @redis = options[:redis] || Wolverine.redis
+      @config = options[:config] || Wolverine.config
     end
 
     # @param sym [Symbol] the file or directory to look up and execute
@@ -51,12 +53,12 @@ class Wolverine
     end
 
     def define_directory_method path, sym
-      dir = PathComponent.new(path, @redis)
+      dir = PathComponent.new(path, @options)
       define_metaclass_method(sym) { dir }
     end
 
     def define_script_method path, sym, *args
-      script = Wolverine::Script.new(path)
+      script = Wolverine::Script.new(path, @options)
       define_metaclass_method(sym) { |*args|
         script.call(@redis, *args)
       }
