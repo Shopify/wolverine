@@ -1,7 +1,7 @@
 require File.join(File.expand_path('../../test_helper', __FILE__))
 require 'digest/sha1'
 
-module Wolverine
+class Wolverine
   class ScriptTest < MiniTest::Unit::TestCase
     CONTENT = "return 1"
     DIGEST = Digest::SHA1.hexdigest(CONTENT)

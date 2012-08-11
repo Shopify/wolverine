@@ -1,4 +1,4 @@
-module Wolverine
+class Wolverine
   class Configuration < Struct.new(:redis, :script_path, :instrumentation)
 
     # @return [Redis] the redis connection actively in use by Wolverine

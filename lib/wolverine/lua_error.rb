@@ -1,4 +1,4 @@
-module Wolverine
+class Wolverine
   # Reformats errors raised by redis representing failures while executing
   # a lua script. The default errors have confusing messages and backtraces,
   # and a type of +RuntimeError+. This class improves the message and
