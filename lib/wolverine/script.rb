@@ -2,7 +2,7 @@ require 'pathname'
 require 'benchmark'
 require 'digest/sha1'
 
-module Wolverine
+class Wolverine
   # {Script} represents a lua script in the filesystem. It loads the script
   # from disk and handles talking to redis to execute it. Error handling
   # is handled by {LuaError}.

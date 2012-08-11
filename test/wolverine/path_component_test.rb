@@ -1,6 +1,6 @@
 require File.join(File.expand_path('../../test_helper', __FILE__))
 
-module Wolverine
+class Wolverine
   class PathComponentTest < MiniTest::Unit::TestCase
 
     def root
