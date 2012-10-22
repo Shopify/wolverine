@@ -65,7 +65,7 @@ class Wolverine
     end
 
     def relative_path
-      path = @file.relative_path_from(@config.script_path)
+      @path ||= @file.relative_path_from(@config.script_path)
     end
 
     def load_lua file
