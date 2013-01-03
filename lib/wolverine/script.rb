@@ -47,13 +47,13 @@ class Wolverine
 
     def run_evalsha redis, *args
       instrument :evalsha do
-        redis.evalsha @digest, args.size, *args
+        redis.evalsha @digest, *args
       end
     end
 
     def run_eval redis, *args
       instrument :eval do
-        redis.eval @content, args.size, *args
+        redis.eval @content, *args
       end
     end
 
