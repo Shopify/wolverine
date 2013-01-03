@@ -7,10 +7,10 @@ class WolverineIntegrationTest < MiniTest::Unit::TestCase
   def mock_redis
     stub.tap do |redis|
       redis.expects(:evalsha).
-        with('fe24f4dd4ba7881608cca4b846f009195e06d79a', 2, :a, :b).
+        with('fe24f4dd4ba7881608cca4b846f009195e06d79a', :a, :b).
         raises("NOSCRIPT").once
       redis.expects(:eval).
-        with(CONTENT, 2, :a, :b).
+        with(CONTENT, :a, :b).
         returns([1, 0]).once
     end
   end
