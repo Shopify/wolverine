@@ -43,7 +43,7 @@ class Wolverine
       }
       Wolverine.config.instrumentation = callback
       redis = Class.new do
-        define_method(:evalsha) do |digest, size, *args|
+        define_method(:evalsha) do |digest, *args|
           nil
         end
       end
@@ -53,9 +53,8 @@ class Wolverine
     def test_call_with_cache_hit
       tc = self
       redis = Class.new do
-        define_method(:evalsha) do |digest, size, *args|
+        define_method(:evalsha) do |digest, *args|
           tc.assert_equal DIGEST, digest
-          tc.assert_equal 2, size
           tc.assert_equal [:a, :b], args
         end
       end
@@ -68,9 +67,8 @@ class Wolverine
         define_method(:evalsha) do |*|
           raise "NOSCRIPT No matching script. Please use EVAL."
         end
-        define_method(:eval) do |content, size, *args|
+        define_method(:eval) do |content, *args|
           tc.assert_equal CONTENT, content
-          tc.assert_equal 2, size
           tc.assert_equal [:a, :b], args
         end
       end
