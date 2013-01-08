@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Wolverine::VERSION
   s.authors     = ["Burke Libbey"]
   s.email       = ["burke@burkelibbey.org"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/Shopify/wolverine"
   s.summary     = %q{Wolverine provides a simple way to run server-side redis scripts from a rails app}
   s.description = %q{Wolverine provides a simple way to run server-side redis scripts from a rails app}
 
