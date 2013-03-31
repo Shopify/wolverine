@@ -18,6 +18,7 @@ class Wolverine
     def initialize path, options = {}
       @path = path
       @options = options
+      @cache_to = options[:cache_to]
       @redis = options[:redis] || Wolverine.redis
       @config = options[:config] || Wolverine.config
     end
@@ -53,20 +54,33 @@ class Wolverine
     end
 
     def define_directory_method path, sym
-      dir = PathComponent.new(path, @options)
-      define_metaclass_method(sym) { dir }
+      options = @options.merge({:cache_to => nil})
+      dir = PathComponent.new(path, options)
+      cb = proc { dir }
+      define_metaclass_method(sym, &cb)
+      cache_metaclass_method(sym, &cb)
     end
 
     def define_script_method path, sym, *args
-      script = Wolverine::Script.new(path, @options)
-      define_metaclass_method(sym) { |*args|
-        script.call(@redis, *args)
-      }
+      redis, options = @redis, @options.merge({:cache_to => nil})
+      script = Wolverine::Script.new(path, options)
+      cb = proc { |*args| script.call(redis, *args) }
+      define_metaclass_method(sym, &cb) 
+      cache_metaclass_method(sym, &cb)
     end
 
     def define_metaclass_method sym, &block
       metaclass = class << self; self; end
       metaclass.send(:define_method, sym, &block)
+    end
+
+    def cache_metaclass_method sym, &block
+      unless @cache_to.nil?
+        metaclass = class << @cache_to; self; end
+        metaclass.send(:define_method, sym, &block)
+        cached_methods = @cache_to.send(:cached_methods)
+        cached_methods[sym] = self
+      end
     end
 
   end

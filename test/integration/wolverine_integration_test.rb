@@ -20,6 +20,7 @@ class WolverineIntegrationTest < MiniTest::Unit::TestCase
     Wolverine.config.script_path = Pathname.new(File.expand_path('../lua', __FILE__))
 
     assert_equal [1, 0], Wolverine.util.mexists(:a, :b)
+    assert Wolverine.methods.include?(:util)
   end
 
   def test_everything_instantiated
@@ -28,6 +29,7 @@ class WolverineIntegrationTest < MiniTest::Unit::TestCase
 
     wolverine = Wolverine.new(config)
     assert_equal [1, 0], wolverine.util.mexists(:a, :b)
+    assert wolverine.methods.include?(:util)
   end
 
 end
