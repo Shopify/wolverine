@@ -4,18 +4,14 @@ Wolverine is a simple library to allow you to manage and run redis server-side l
 
 Redis versions 2.6 and up allow lua scripts to be run on the server that execute atomically and very quickly.
 
-This is *extremely* useful.
-
 Wolverine is a wrapper around that functionality, to package it up in a format more familiar to a Rails codebase.
 
 ## How do I use it?
 
-1) Make sure you have redis 2.6 or higher installed. As of now, that means compiling from source:
+1) Make sure you have redis 2.6 or higher installed.
 
-```shell
-git clone https://github.com/antirez/redis.git
-cd redis && make
-./src/redis-server
+```
+redis-server -v
 ```
 
 2) Add wolverine to your Gemfile:
