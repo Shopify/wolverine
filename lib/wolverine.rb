@@ -30,6 +30,7 @@ class Wolverine
   # @return [void]
   def self.reset!
     @root_directory = nil
+    reset_cached_methods
   end
 
   # Used to handle dynamic accesses to scripts. Successful lookups will be
@@ -58,6 +59,7 @@ class Wolverine
 
   def reset!
     @root_directory = nil
+    reset_cached_methods
   end
 
   def method_missing sym, *args
@@ -69,11 +71,31 @@ class Wolverine
   private
 
   def self.root_directory
-    @root_directory ||= PathComponent.new(config.script_path)
+    @root_directory ||= PathComponent.new(config.script_path, {:cache_to => self})
+  end
+
+  def self.cached_methods
+    @cached_methods ||= Hash.new
+  end
+
+  def self.reset_cached_methods
+    metaclass = class << self; self; end
+    cached_methods.each_key { |method| metaclass.send(:undef_method, method) }
+    cached_methods.clear
   end
 
   def root_directory
-    @root_directory ||= PathComponent.new(config.script_path, {:config => config, :redis => redis})
+    @root_directory ||= PathComponent.new(config.script_path, {:cache_to => self, :config => config, :redis => redis})
+  end
+
+  def cached_methods
+    @cached_methods ||= Hash.new
+  end
+
+  def reset_cached_methods
+    metaclass = class << self; self; end
+    cached_methods.each_key { |method| metaclass.send(:undef_method, method) }
+    cached_methods.clear
   end
 
 end
