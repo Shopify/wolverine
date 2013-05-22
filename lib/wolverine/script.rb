@@ -30,6 +30,7 @@ class Wolverine
     # @raise [LuaError] if the script failed to compile of encountered a
     #   runtime error
     def call redis, *args
+      t = Time.now
       begin
         run_evalsha redis, *args
       rescue => e
@@ -41,9 +42,16 @@ class Wolverine
       else
         raise
       end
+    ensure
+      StatsD.measure(statsd_key, (Time.now - t) * 1000, 0.001) if Wolverine.statsd_enabled?
     end
 
     private
+
+    def statsd_key
+      k = @file.relative_path_from(Wolverine.config.script_path).to_s.sub!(/\.lua$/,'').gsub!(/\//,'.')
+      "Wolverine.#{k}"
+    end
 
     def run_evalsha redis, *args
       instrument :evalsha do
