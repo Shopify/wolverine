@@ -23,6 +23,14 @@ class Wolverine
     config.redis
   end
 
+  def self.statsd_enabled?
+    @statsd_enabled
+  end
+
+  def self.enable_statsd!
+    @statsd_enabled = true
+  end
+
   # Resets all the scripts cached by Wolverine. Scripts are lazy-loaded and
   # cached in-memory, so if a file changes on disk, it will be necessary to
   # manually reset the cache using +reset!+.
