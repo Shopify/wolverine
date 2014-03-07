@@ -16,7 +16,6 @@ class Wolverine
     end
 
     def teardown
-      FileUtils.rm_rf 'a'
       Wolverine.config.instrumentation = proc{}
     end
 
