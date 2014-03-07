@@ -1,6 +1,7 @@
 require 'pathname'
 require 'benchmark'
 require 'digest/sha1'
+require 'erb'
 
 class Wolverine
   # {Script} represents a lua script in the filesystem. It loads the script
@@ -77,7 +78,11 @@ class Wolverine
     end
 
     def load_lua file
-      File.read file
+      ERB.new(File.read(file)).result binding
+    end
+
+    def load_inner file
+      ERB.new(File.read("#{Wolverine.config.script_path}/#{file}")).result binding
     end
 
   end
