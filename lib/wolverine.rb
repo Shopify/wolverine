@@ -71,7 +71,13 @@ class Wolverine
   end
 
   def method_missing sym, *args
-    if sym[0] == '_' then super else root_directory.send(sym, *args) end
+    # Disallow access to protected partials (files that begin with _ character)
+    if sym[0] == '_'
+      super
+    else
+      root_directory.send(sym, *args)
+    end
+    
   rescue PathComponent::MissingTemplate
     super
   end
