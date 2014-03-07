@@ -56,7 +56,7 @@ If your app has lua scripts at
 - `app/wolverine/do_something.lua`
 - `app/wolverine/do_something_else.lua`
 
-that both have shared lua code, you can factor it out into a lua partial:
+that both have shared lua code, you can factor it out into a lua "partial":
 
 - `app/wolverine/shared/_common.lua`
 
@@ -82,7 +82,8 @@ complex_redis_command("bar", "baz")
 return false
 ```
 
-Note that prepending an underscore to the lua script means it is protected, and can't be EVAL'd with redis by itself. For the above example, `Wolverine.shared._common [key1], [arg1]` would not EVAL the `app/wolverine/shared/_common.lua` script.
+- partials are loaded relative to the `Wolverine.config.script_path` location
+- partials can be protected by adding an underscore (eg. `shared/_common.lua`). This disallows EVAL access through `Wolverine.shared._common`
 
 ## Configuration
 
