@@ -2,10 +2,12 @@ require File.join(File.expand_path('../../test_helper', __FILE__))
 require 'digest/sha1'
 require 'fileutils'
 
-RESULT = "local function do_something()
+RESULT = <<EOF
+local function do_something()
   return 15;
 end
-return do_something()"
+return do_something()
+EOF
 
 class Wolverine
   class ScriptTemplatingTest < MiniTest::Unit::TestCase

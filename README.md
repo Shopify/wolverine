@@ -70,14 +70,14 @@ end
 
 ```lua
 -- app/wolverine/do_something.lua
-<%= load_inner 'shared/_common.lua' %>
+<%= include_partial 'shared/_common.lua' %>
 complex_redis_command("foo", "bar")
 return true
 ```
 
 ```lua
 -- app/wolverine/do_something_else.lua
-<%= load_inner 'shared/_common.lua' %>
+<%= include_partial 'shared/_common.lua' %>
 complex_redis_command("bar", "baz")
 return false
 ```

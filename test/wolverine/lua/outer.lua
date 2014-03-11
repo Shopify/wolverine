@@ -1,2 +1,2 @@
-<%= load_inner 'shared/_inner.lua' %>
+<%= include_partial 'shared/_inner.lua' %>
 return do_something()
