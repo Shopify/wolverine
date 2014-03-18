@@ -1,6 +1,7 @@
 require 'pathname'
 require 'benchmark'
 require 'digest/sha1'
+require 'erb'
 
 class Wolverine
   # {Script} represents a lua script in the filesystem. It loads the script
@@ -77,7 +78,22 @@ class Wolverine
     end
 
     def load_lua file
-      File.read file
+      TemplateContext.template(file)
+    end
+
+    class TemplateContext
+      
+      def self.template(pathname)
+        ERB.new(File.read(pathname)).result binding
+      end
+
+      # helper method to include a lua partial within another lua script
+      #
+      # @param relative_path [String] the relative path to the script from 
+      #     `Wolverine.config.script_path`
+      def self.include_partial(relative_path)
+        template( Pathname.new("#{Wolverine.config.script_path}/#{relative_path}") )
+      end
     end
 
   end

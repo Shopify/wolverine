@@ -47,6 +47,44 @@ Wolverine.util.mexists(:keys => ['key1', 'key2', 'key3']) #=> [0, 1, 0]
 Methods are available on `Wolverine` paralleling the directory structure
 of wolverine's `script_path`.
 
+#### Nested Lua Scripts
+
+For lua scripts with shared code, Wolverine supports ERB style templating.
+
+If your app has lua scripts at
+
+- `app/wolverine/do_something.lua`
+- `app/wolverine/do_something_else.lua`
+
+that both have shared lua code, you can factor it out into a lua "partial":
+
+- `app/wolverine/shared/_common.lua`
+
+```lua
+-- app/wolverine/shared/_common.lua
+local function complex_redis_command(key, value)
+  local dict = {}
+  dict[key] = value
+end
+```
+
+```lua
+-- app/wolverine/do_something.lua
+<%= include_partial 'shared/_common.lua' %>
+complex_redis_command("foo", "bar")
+return true
+```
+
+```lua
+-- app/wolverine/do_something_else.lua
+<%= include_partial 'shared/_common.lua' %>
+complex_redis_command("bar", "baz")
+return false
+```
+
+- partials are loaded relative to the `Wolverine.config.script_path` location
+- partials can be protected by adding an underscore (eg. `shared/_common.lua`). This disallows EVAL access through `Wolverine.shared._common`
+
 ## Configuration
 
 Available configuration options:
