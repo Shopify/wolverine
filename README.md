@@ -1,4 +1,4 @@
-# Wolverine [![Build Status](https://secure.travis-ci.org/burke/wolverine.png)](http://travis-ci.org/burke/wolverine) [![Dependency Status](https://gemnasium.com/Shopify/wolverine.png)](https://gemnasium.com/Shopify/wolverine)
+# Wolverine [![Dependency Status](https://gemnasium.com/Shopify/wolverine.png)](https://gemnasium.com/Shopify/wolverine)
 
 Wolverine is a simple library to allow you to manage and run redis server-side lua scripts from a rails app, or other ruby code.
 
