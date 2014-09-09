@@ -58,7 +58,7 @@ class Wolverine
   end
 
   def config
-    @config || self.class.config
+    @config ||= self.class.config.dup
   end
 
   def redis
