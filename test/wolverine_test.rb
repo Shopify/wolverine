@@ -24,4 +24,12 @@ class WolverineTest < MiniTest::Unit::TestCase
     assert_equal 'path', wolverine.config.script_path
   end
 
+  def test_instantiate_without_config_dups_the_default_config
+    Wolverine.config.redis = :redis
+    wolverine = Wolverine.new
+    assert_equal :redis, wolverine.config.redis
+    wolverine.config.redis = :foobar
+    assert_equal :foobar, wolverine.config.redis
+    assert_equal :redis, Wolverine.config.redis
+  end
 end
