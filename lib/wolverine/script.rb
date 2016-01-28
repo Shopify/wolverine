@@ -78,21 +78,25 @@ class Wolverine
     end
 
     def load_lua file
-      TemplateContext.template(file)
+      TemplateContext.new.template(file)
     end
 
     class TemplateContext
-      
-      def self.template(pathname)
+
+      def template(pathname)
+        @partial_templates ||= {}
         ERB.new(File.read(pathname)).result binding
       end
 
       # helper method to include a lua partial within another lua script
       #
-      # @param relative_path [String] the relative path to the script from 
+      # @param relative_path [String] the relative path to the script from
       #     `Wolverine.config.script_path`
-      def self.include_partial(relative_path)
-        template( Pathname.new("#{Wolverine.config.script_path}/#{relative_path}") )
+      def include_partial(relative_path)
+        unless @partial_templates.has_key? relative_path
+          @partial_templates[relative_path] = nil
+          template( Pathname.new("#{Wolverine.config.script_path}/#{relative_path}") )
+        end
       end
     end
 
