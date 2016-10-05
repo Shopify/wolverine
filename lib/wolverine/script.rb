@@ -14,9 +14,9 @@ class Wolverine
     # @param file [Pathname] the full path to the indicated file
     def initialize file, options = {}
       @file = Pathname.new(file)
+      @config = options[:config] || Wolverine.config
       @content = load_lua file
       @digest = Digest::SHA1.hexdigest @content
-      @config = options[:config] || Wolverine.config
     end
 
     # Passes the script and supplied arguments to redis for evaulation.
@@ -78,10 +78,13 @@ class Wolverine
     end
 
     def load_lua file
-      TemplateContext.new.template(file)
+      TemplateContext.new(@config.script_path).template(file)
     end
 
     class TemplateContext
+      def initialize(script_path)
+        @script_path = script_path
+      end
 
       def template(pathname)
         @partial_templates ||= {}
@@ -95,7 +98,7 @@ class Wolverine
       def include_partial(relative_path)
         unless @partial_templates.has_key? relative_path
           @partial_templates[relative_path] = nil
-          template( Pathname.new("#{Wolverine.config.script_path}/#{relative_path}") )
+          template( Pathname.new("#{@script_path}/#{relative_path}") )
         end
       end
     end
