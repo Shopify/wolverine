@@ -11,7 +11,7 @@ EOF
 
 class Wolverine
   class ScriptTemplatingTest < MiniTest::Unit::TestCase
-    
+
     def setup
       base = Pathname.new('test/wolverine/lua')
       Wolverine.config.script_path = base
