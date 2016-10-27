@@ -32,10 +32,17 @@ class Wolverine
     #   runtime error
     def call redis, *args
       t = Time.now
+      args_copy = args.map do |arg| 
+        if arg.is_a?(Hash)
+          arg.dup
+        else
+          arg
+        end
+      end
       begin
         run_evalsha redis, *args
       rescue => e
-        e.message =~ /NOSCRIPT/ ? run_eval(redis, *args) : raise
+        e.message =~ /NOSCRIPT/ ? run_eval(redis, *args_copy) : raise
       end
     rescue => e
       if LuaError.intercepts?(e)
