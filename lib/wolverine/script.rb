@@ -32,7 +32,13 @@ class Wolverine
     #   runtime error
     def call redis, *args
       t = Time.now
-      args_copy = args.dup
+      args_copy = args.map do |arg| 
+        if arg.is_a?(Hash)
+          arg.dup
+        else
+          arg
+        end
+      end
       begin
         run_evalsha redis, *args
       rescue => e
