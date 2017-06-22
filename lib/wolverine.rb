@@ -87,16 +87,19 @@ class Wolverine
   def self.root_directory
     @root_directory ||= PathComponent.new(config.script_path, {:cache_to => self})
   end
+  private_class_method :root_directory
 
   def self.cached_methods
     @cached_methods ||= Hash.new
   end
+  private_class_method :cached_methods
 
   def self.reset_cached_methods
     metaclass = class << self; self; end
     cached_methods.each_key { |method| metaclass.send(:undef_method, method) }
     cached_methods.clear
   end
+  private_class_method :reset_cached_methods
 
   def root_directory
     @root_directory ||= PathComponent.new(config.script_path, {:cache_to => self, :config => config, :redis => redis})
@@ -111,5 +114,4 @@ class Wolverine
     cached_methods.each_key { |method| metaclass.send(:undef_method, method) }
     cached_methods.clear
   end
-
 end
