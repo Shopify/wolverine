@@ -28,7 +28,7 @@ class Wolverine
       rescue Wolverine::LuaError => e
         assert_equal "attempt to compare nil with number", e.message
         assert_equal "/a/b/c/d/e/file1.lua:1", e.backtrace.first
-        assert_match /script.rb/, e.backtrace[1]
+        assert_match(/script.rb/, e.backtrace[1])
       end
     end
 
