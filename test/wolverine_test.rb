@@ -8,10 +8,10 @@ class WolverineTest < MiniTest::Unit::TestCase
   end
 
   def test_reset!
-    dir = Wolverine.root_directory
-    assert_equal Wolverine.root_directory, dir
+    dir = Wolverine.send(:root_directory)
+    assert_equal Wolverine.send(:root_directory), dir
     Wolverine.reset!
-    refute_equal Wolverine.root_directory, dir
+    refute_equal Wolverine.send(:root_directory), dir
   end
 
   def test_instantiate_wolverine_with_config
