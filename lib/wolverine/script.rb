@@ -39,7 +39,7 @@ class Wolverine
       end
     rescue => e
       if LuaError.intercepts?(e)
-        raise LuaError.new(e, @file)
+        raise LuaError.new(e, @file, @content)
       else
         raise
       end
