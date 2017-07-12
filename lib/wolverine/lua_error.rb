@@ -26,7 +26,7 @@ class Wolverine
       @file = file
 
       @error.message =~ PATTERN
-      stage, line_number, message = $1, $2, $3
+      _stage, line_number, message = $1, $2, $3
 
       super message
       set_backtrace generate_backtrace file, line_number

@@ -24,7 +24,7 @@ class Wolverine
   end
 
   def self.statsd_enabled?
-    @statsd_enabled
+    defined?(@statsd_enabled) && @statsd_enabled
   end
 
   def self.enable_statsd!

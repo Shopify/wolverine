@@ -50,7 +50,7 @@ class Wolverine
     end
 
     def file?(path)
-      File.exists?(path) && !File.directory?(path)
+      File.exist?(path) && !File.directory?(path)
     end
 
     def define_directory_method path, sym
@@ -64,7 +64,7 @@ class Wolverine
     def define_script_method path, sym, *args
       redis, options = @redis, @options.merge({:cache_to => nil})
       script = Wolverine::Script.new(path, options)
-      cb = proc { |*args| script.call(redis, *args) }
+      cb = proc { |*cb_args| script.call(redis, *cb_args) }
       define_metaclass_method(sym, &cb) 
       cache_metaclass_method(sym, &cb)
     end
