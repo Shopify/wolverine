@@ -3,7 +3,16 @@ require 'digest/sha1'
 
 class Wolverine
   class ScriptTest < MiniTest::Unit::TestCase
-    CONTENT = "return 1"
+    CONTENT = <<EOC
+local key, score, member, context, max_rank = KEYS[1], ARGV[1], ARGV[2], ARGV[3], ARGV[4]
+redis.call('ZADD', key, score, member)
+
+local rank = redis.call('ZRANK', key, member)
+if rank > max_rank then
+  return {}
+end
+return redis.call('ZRANGE', start, end, 'WITHSCORES')
+EOC
     DIGEST = Digest::SHA1.hexdigest(CONTENT)
 
     def setup
@@ -22,12 +31,21 @@ class Wolverine
 
     def test_error
       redis = stub
-      redis.expects(:evalsha).raises(%q{ERR Error running script (call to f_178d75adaa46af3d8237cfd067c9fdff7b9d504f): [string "func definition"]:1: attempt to compare nil with number})
+      redis.expects(:evalsha).raises(%q{ERR Error running script (call to f_178d75adaa46af3d8237cfd067c9fdff7b9d504f): [string "func definition"]:5: attempt to compare nil with number})
       begin
         script.call(redis)
       rescue Wolverine::LuaError => e
-        assert_equal "attempt to compare nil with number", e.message
-        assert_equal "/a/b/c/d/e/file1.lua:1", e.backtrace.first
+        assert_equal <<EOS, e.message
+attempt to compare nil with number
+
+    3: 
+    4: local rank = redis.call('ZRANK', key, member)
+ => 5: if rank > max_rank then
+    6:   return {}
+    7: end
+
+EOS
+        assert_equal "/a/b/c/d/e/file1.lua:5", e.backtrace.first
         assert_match(/script.rb/, e.backtrace[1])
       end
     end
