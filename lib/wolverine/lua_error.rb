@@ -9,6 +9,8 @@ class Wolverine
     WOLVERINE_LIB_PATH = File.expand_path('../../', __FILE__)
     CONTEXT_LINE_NUMBER = 2
 
+    attr_reader :error, :file, :content
+
     # Is this error one that should be reformatted?
     #
     # @param error [StandardError] the original error raised by redis
